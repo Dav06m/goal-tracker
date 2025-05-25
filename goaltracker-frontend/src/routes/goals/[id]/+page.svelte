@@ -1,5 +1,5 @@
-import { PUBLIC_API_URL } from '$env/static/public'
 <script>
+  import { PUBLIC_API_URL } from '$env/static/public';
   import { onMount } from 'svelte';
   import { goals } from '../../../stores/goalStore.js';
   import { format } from 'date-fns';

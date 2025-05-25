@@ -1,5 +1,5 @@
 <script>
-  import { PUBLIC_API_URL } from '$env/static/public'
+  import { PUBLIC_API_URL } from '$env/static/public';
   import { goals } from '../stores/goalStore.js';
   
   $: totalGoals = $goals.length;

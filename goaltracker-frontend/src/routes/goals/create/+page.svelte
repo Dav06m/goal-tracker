@@ -1,5 +1,5 @@
-import { PUBLIC_API_URL } from '$env/static/public'
 <script>
+  import { PUBLIC_API_URL } from '$env/static/public';
   import { goto } from '$app/navigation';
   import { goals } from '../../../stores/goalStore.js';
   import GoalForm from '../../../components/GoalForm.svelte';

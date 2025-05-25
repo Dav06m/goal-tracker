@@ -1,5 +1,5 @@
-import { PUBLIC_API_URL } from '$env/static/public'
 <script>
+  import { PUBLIC_API_URL } from '$env/static/public';
   import { goals } from '../../stores/goalStore.js';
   import GoalCard from '../../components/GoalCard.svelte';
   import CategoryFilter from '../../components/CategoryFilter.svelte';

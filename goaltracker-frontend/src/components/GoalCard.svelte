@@ -1,5 +1,5 @@
 <script>
-  import { PUBLIC_API_URL } from '$env/static/public'
+  import { PUBLIC_API_URL } from '$env/static/public';
   import { createEventDispatcher } from 'svelte';
   import { format, isAfter, differenceInDays } from 'date-fns';
   import { goals } from '../stores/goalStore.js';
