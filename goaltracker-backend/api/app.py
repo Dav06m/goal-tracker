@@ -9,8 +9,9 @@ from bson import ObjectId
 app = Flask(__name__)
 CORS(app)
 
-# MongoDB connection
-client = MongoClient('mongodb://admin:admin@localhost:27017/')
+mongo_uri = os.environ.get("MONGO_URI")
+client = MongoClient(mongo_uri)
+
 db = client['goaltracker']
 goals_collection = db['goals']
 
@@ -27,48 +28,47 @@ app.json_encoder = JSONEncoder
 
 SUGGESTIONS_BY_CATEGORY = {
     "personal": [
-        "Dedica 30 minuti ogni giorno per lavorare su questo obiettivo",
-        "Condividi il tuo obiettivo con un amico per responsabilizzarti",
-        "Suddividi questo obiettivo in piccoli traguardi settimanali",
-        "Crea una mood board per questo obiettivo per mantenere la motivazione",
-        "Tieni un diario dei tuoi progressi ogni settimana"
+        "Set aside 30 minutes each day to work on this goal",
+        "Share your goal with a friend for accountability",
+        "Break this goal down into smaller weekly targets",
+        "Create a vision board for this goal to stay motivated",
+        "Journal about your progress weekly"
     ],
     "work": [
-        "Pianifica nel calendario un blocco di tempo specifico per questo compito",
-        "Usa la tecnica Pomodoro (25 min di lavoro, 5 min di pausa) per fare progressi",
-        "Crea un ambiente di lavoro senza distrazioni quando lavori su questo obiettivo",
-        "Trova un partner di responsabilità sul lavoro",
-        "Imposta promemoria automatici per lavorare su questo obiettivo"
+        "Schedule a specific time block in your calendar for this task",
+        "Use the Pomodoro technique (25min work, 5min break) to make progress",
+        "Create a distraction-free environment when working on this goal",
+        "Find an accountability partner at work",
+        "Set up automated reminders to work on this goal"
     ],
     "health": [
-        "Monitora i tuoi progressi con un’app dedicata alla salute",
-        "Trova un compagno di allenamento per mantenerti motivato",
-        "Prepara abiti da palestra la sera prima per ridurre l’attrito",
-        "Prova l’abbinamento di abitudini: collega la nuova abitudine alla salute a una già esistente",
-        "Programma i tuoi allenamenti alla stessa ora ogni giorno per creare costanza"
+        "Track your progress with a dedicated health app",
+        "Find a workout buddy to keep you motivated",
+        "Prepare your gym clothes the night before to remove friction",
+        "Try habit stacking - attach your new health habit to an existing one",
+        "Schedule your workouts at the same time each day to build consistency"
     ],
     "finance": [
-        "Imposta un trasferimento automatico su un conto di risparmio dedicato",
-        "Rivedi i tuoi progressi ogni settimana e aggiusta il budget se necessario",
-        "Usa un’app di monitoraggio delle spese per individuare dove puoi tagliare",
-        "Prova la regola dei 30 giorni: attendi 30 giorni prima di fare grandi acquisti",
-        "Valuta di consultare un consulente finanziario per consigli personalizzati"
+        "Set up an automatic transfer to a dedicated savings account",
+        "Review your progress weekly and adjust your budget as needed",
+        "Use a spending tracker app to identify areas where you can cut back",
+        "Try the 30-day rule - wait 30 days before making any large purchase",
+        "Consider consulting with a financial advisor for personalized advice"
     ],
     "learning": [
-        "Usa tecniche di ripetizione dilazionata per memorizzare ciò che impari",
-        "Insegna a qualcuno ciò che hai appreso per solidificare la comprensione",
-        "Unisciti a una comunità online correlata a ciò che stai studiando",
-        "Applica la Tecnica di Feynman: spiega il concetto in termini semplici",
-        "Prepara un ambiente di apprendimento senza distrazioni"
+        "Use spaced repetition techniques to retain what you learn",
+        "Teach someone else what you've learned to solidify your understanding",
+        "Join an online community related to what you're learning",
+        "Apply the Feynman Technique - explain the concept in simple terms",
+        "Set up a distraction-free learning environment"
     ],
     "other": [
-        "Rivedi il tuo obiettivo ogni settimana e aggiusta il tuo approccio se necessario",
-        "Crea un promemoria visivo del tuo obiettivo in un luogo che vedrai ogni giorno",
-        "Celebra i piccoli successi per mantenere alta la motivazione",
-        "Usa il framework SMART per affinare il tuo obiettivo",
-        "Prova il metodo “non rompere la catena”: segnala ogni giorno in cui lavori sul tuo obiettivo"
+        "Review your goal weekly and adjust your approach as needed",
+        "Create a visual reminder of your goal somewhere you'll see daily",
+        "Celebrate small wins to maintain motivation",
+        "Use the SMART framework to refine your goal",
+        "Try the 'don't break the chain' method - mark each day you work on your goal"
     ]
-
 }
 
 @app.route('/api/goals', methods=['GET'])
